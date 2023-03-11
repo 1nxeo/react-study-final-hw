@@ -8,7 +8,6 @@ function Button({ children, ...rest }) {
 const StButton = styled.button`
   background-color: white;
   border: 1px solid lightgray;
-  border-radius: 10px;
   width: 50px;
   height: 30px;
 `;

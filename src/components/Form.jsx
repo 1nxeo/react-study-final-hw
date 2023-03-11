@@ -55,7 +55,6 @@ const StInput = styled.input`
   width: 300px;
   height: 30px;
   border: 1px solid;
-  border-radius: 10px;
 `;
 
 const FormWrapper = styled.form`
