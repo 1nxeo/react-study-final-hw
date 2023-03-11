@@ -50,13 +50,13 @@ const ListWrapper = styled.div`
   width: 80%;
   height: 65vh;
   justify-content: space-around;
-  border: 1px solid;
+  /* border: 1px solid; */
   margin-top: 10px;
   overflow: scroll;
 `;
 
 const ListBox = styled.div`
-  border: 1px solid;
+  /* border: 1px solid; */
   width: 100%;
   margin: 20px;
   height: auto;
@@ -70,7 +70,8 @@ const ListBox = styled.div`
 const Lists = styled.div`
   width: 100%;
   height: 100%;
-  border: 1px solid;
+  border: 1px solid transparent;
+  background-color: rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   flex-flow: row wrap;
