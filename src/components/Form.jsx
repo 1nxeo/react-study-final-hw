@@ -61,7 +61,7 @@ const FormWrapper = styled.form`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 80%;
+  width: 90%;
   height: 30px;
   margin: 20px;
 `;

@@ -38,7 +38,7 @@ function List() {
 const ListHeader = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 80%;
+  width: 90%;
   justify-items: center;
   font-size: 30px;
   font-weight: 800;
@@ -48,7 +48,7 @@ const ListHeader = styled.div`
 const ListWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 80%;
+  width: 90%;
   height: 65vh;
   justify-content: space-around;
   /* border: 1px solid; */
