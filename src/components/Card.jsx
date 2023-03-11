@@ -28,7 +28,7 @@ function Card({ wish }) {
         <p>{wish.contents}</p>
         <Button
           onClick={() => {
-            alert("에라이");
+            alert(`${wish.isDone ? "에라이" : "아좌잣"}`);
             dispatch(switchWish(wish.id));
           }}
         >
