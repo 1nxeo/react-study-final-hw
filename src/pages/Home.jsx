@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Form from "../components/Form";
 import Header from "../components/Header";
@@ -11,9 +10,7 @@ function Home() {
     <Wrapper>
       <Header />
       <Form />
-      <List>
-        <Card />
-      </List>
+      <List />
       <Footer />
     </Wrapper>
   );
@@ -24,7 +21,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  max-width: 1200px;
+  min-width: 800px;
+  margin: auto;
 `;
 
 export default Home;

@@ -1,12 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function Header() {
-  return <StHeader>@1nxeo Archive</StHeader>;
+  const navigate = useNavigate();
+  return <StHeader onClick={(e) => navigate("/")}>@1nxeo Archive</StHeader>;
 }
 
 const StHeader = styled.div`
-  height: 100px;
+  height: 80px;
   width: 80%;
   display: flex;
   justify-content: center;

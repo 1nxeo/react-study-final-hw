@@ -6,26 +6,43 @@ import Card from "./Card";
 function List() {
   const wishes = useSelector((state) => state.wishlists.wishes);
   return (
-    <ListWrapper>
-      <ListBox>
-        <h1>사고싶다</h1>
-        <Lists>
-          {wishes.map((item) =>
-            item.isDone ? null : <Card key={item.id} wish={item} />
-          )}
-        </Lists>
-      </ListBox>
-      <ListBox>
-        <h1>사버렸다</h1>
-        <Lists>
-          {wishes.map((item) =>
-            item.isDone ? <Card key={item.id} wish={item} /> : null
-          )}
-        </Lists>
-      </ListBox>
-    </ListWrapper>
+    <>
+      <ListHeader>
+        <div>사고싶다</div>
+        <div>사버렸다</div>
+      </ListHeader>
+      <ListWrapper>
+        {/* <h1>사고싶다</h1> */}
+        <ListBox>
+          {/* <h1>사고싶다</h1> */}
+          <Lists>
+            {wishes.map((item) =>
+              item.isDone ? null : <Card key={item.id} wish={item} />
+            )}
+          </Lists>
+        </ListBox>
+        {/* <h1>사버렸다</h1> */}
+        <ListBox>
+          {/* <h1>사버렸다</h1> */}
+          <Lists>
+            {wishes.map((item) =>
+              item.isDone ? <Card key={item.id} wish={item} /> : null
+            )}
+          </Lists>
+        </ListBox>
+      </ListWrapper>
+    </>
   );
 }
+
+const ListHeader = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 80%;
+  justify-items: center;
+  font-size: 30px;
+  font-weight: 800;
+`;
 
 const ListWrapper = styled.div`
   display: flex;
@@ -43,7 +60,6 @@ const ListBox = styled.div`
   width: 100%;
   margin: 20px;
   height: auto;
-  flex-wrap: wrap;
 `;
 
 // const ListTitle = styled.div`
@@ -57,6 +73,7 @@ const Lists = styled.div`
   border: 1px solid;
   display: flex;
   justify-content: space-between;
+  flex-flow: row wrap;
 `;
 
 export default List;
