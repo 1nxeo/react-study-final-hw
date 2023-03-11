@@ -1,38 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { switchWish } from "../redux/modules/wishlists";
+// import { switchWish } from "../redux/modules/wishlists";
 import Button from "./Button";
+import axios from "axios";
 
 function Card({ wish }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const switchWishHandler = (id) => {
-  //   dispatch(switchWish(id));
-  // };
-
-  // const toDetailHandler = (e) => {
-  //   if (e.target == e.currentTarget) {
-  //     navigate(`/detail/${wish.id}`);
-  //   }
-  // };
+  const onClickDeleteButtonHandler = (wishId) => {
+    axios.delete(`http://localhost:4000/wishes/${wishId}`);
+  };
 
   console.log(wish);
   return (
     <CardWrapper key={wish.id}>
-      {/* <CardToDetail  /> */}
       <CardImage onClick={(e) => navigate(`/detail/${wish.id}`)}></CardImage>
       <div>
         <p>{wish.contents}</p>
         <Button
           onClick={() => {
             alert(`${wish.isDone ? "에라이" : "아좌잣"}`);
-            dispatch(switchWish(wish.id));
+            // dispatch(switchWish(wish.id));
           }}
         >
           {wish.isDone ? "못삼" : "삼"}
+        </Button>
+        <Button
+          onClick={() => {
+            onClickDeleteButtonHandler(wish.id);
+            alert("삭제 완료!");
+          }}
+        >
+          삭제
         </Button>
       </div>
     </CardWrapper>
@@ -42,7 +44,7 @@ function Card({ wish }) {
 // const CardToDetail = styled.div``;
 
 const CardWrapper = styled.div`
-  width: 190px;
+  width: 200px;
   height: 300px;
   border: 1px solid;
   overflow: hidden;

@@ -4,7 +4,7 @@ import wishlists from "../modules/wishlists";
 
 const store = configureStore({
     reducer:{
-        wishlists,
+        wishlists: wishlists,
     }
 })
 

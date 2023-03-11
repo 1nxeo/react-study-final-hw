@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "./Button";
+import Comments from "./Comments";
+import Modal from "./Modal";
 
 function DetailBox() {
   const navigate = useNavigate();
@@ -9,6 +11,14 @@ function DetailBox() {
     <>
       <ListWrapper>
         <DetailWrapper>
+          <Modal
+            buttonName={"수정"}
+            contents={"안녕하세요"}
+            buttonSize="large"
+            margin="15px"
+            buttonGap="10px"
+            position="left"
+          />
           <CardImage></CardImage>
           <h1>이거 사고싶다</h1>
           <h3>상품 링크</h3>
@@ -16,9 +26,7 @@ function DetailBox() {
         </DetailWrapper>
         <CommentWrapper>
           {" "}
-          <div style={{ height: "92%", margin: "10px" }}>
-            여기에 댓글이 들어갑니다
-          </div>
+          <Comments />
           <div
             style={{
               height: "8%",

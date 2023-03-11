@@ -1,10 +1,33 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Card from "./Card";
+// import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { __getWishes } from "../redux/modules/wishlists";
 
 function List() {
-  const wishes = useSelector((state) => state.wishlists.wishes);
+  // const wishes = useSelector((state) => state.wishlists.wishes);
+  const dispatch = useDispatch();
+  const { wishes, isLoading, error } = useSelector((state) => state.wishlists);
+  // const [wishes, setWishes] = useState([]);
+
+  // const fetchTodos = async () => {
+  //   const { data } = await axios.get("http://localhost:4000/wishes");
+  //   setWishes(data);
+  // };
+
+  useEffect(() => {
+    dispatch(__getWishes());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <Message>Loading...</Message>;
+  }
+
+  if (error) {
+    return <Message>{error.message}</Message>;
+  }
+
   return (
     <>
       <ListHeader>
@@ -12,18 +35,14 @@ function List() {
         <div>사버렸다</div>
       </ListHeader>
       <ListWrapper>
-        {/* <h1>사고싶다</h1> */}
         <ListBox lined>
-          {/* <h1>사고싶다</h1> */}
           <Lists>
             {wishes.map((item) =>
               item.isDone ? null : <Card key={item.id} wish={item} />
             )}
           </Lists>
         </ListBox>
-        {/* <h1>사버렸다</h1> */}
         <ListBox>
-          {/* <h1>사버렸다</h1> */}
           <Lists>
             {wishes.map((item) =>
               item.isDone ? <Card key={item.id} wish={item} /> : null
@@ -34,6 +53,20 @@ function List() {
     </>
   );
 }
+
+const Message = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  height: 65vh;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid; */
+  margin-top: 10px;
+  font-size: larger;
+  font-weight: 900;
+  color: red;
+`;
 
 const ListHeader = styled.div`
   display: grid;
@@ -48,7 +81,7 @@ const ListHeader = styled.div`
 const ListWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 90%;
+  width: 95%;
   height: 65vh;
   justify-content: space-around;
   /* border: 1px solid; */

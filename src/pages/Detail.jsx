@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -6,9 +6,22 @@ import Form from "../components/Form";
 import DetailBox from "../components/DetailBox";
 import { useNavigate } from "react-router-dom";
 import GlobalStyle from "../GlobalStyle";
+import axios from "axios";
 
 function Detail() {
   const navigate = useNavigate();
+
+  const [wishes, setWishes] = useState([]);
+  const fetchTodos = async () => {
+    const { data } = await axios.get("http://localhost:4000/wishes");
+    setWishes(data);
+  };
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+  console.log(wishes);
+
   return (
     <Wrapper>
       <GlobalStyle />

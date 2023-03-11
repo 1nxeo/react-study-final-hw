@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Form from "../components/Form";
 import Header from "../components/Header";
 import List from "../components/List";
 import GlobalStyle from "../GlobalStyle";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <GlobalStyle />
-      <Header />
+      <Header onClick={(e) => navigate("/")} />
       <Form />
       <List />
       <Footer />

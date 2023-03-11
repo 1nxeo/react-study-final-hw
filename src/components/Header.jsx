@@ -15,7 +15,7 @@ function Header() {
 
 const StHeader = styled.div`
   height: 80px;
-  width: 90%;
+  width: 95%;
   display: flex;
   /* grid-template-columns: repeat(3, 1fr); */
   justify-content: center;
