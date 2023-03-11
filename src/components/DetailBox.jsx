@@ -8,11 +8,35 @@ function DetailBox() {
   return (
     <>
       <ListWrapper>
-        <Button onClick={(e) => navigate("/")}>홈</Button>
-        <CardImage></CardImage>
-        <h1>이거 사고싶다</h1>
-        <h4>상품 링크</h4>
-        <p>코멘트</p>
+        <DetailWrapper>
+          <CardImage></CardImage>
+          <h1>이거 사고싶다</h1>
+          <h4>상품 링크</h4>
+          <p>코멘트</p>
+        </DetailWrapper>
+        <CommentWrapper>
+          {" "}
+          <div style={{ height: "95%", margin: "10px" }}>
+            여기에 댓글이 들어갑니다
+          </div>
+          <div
+            style={{
+              height: "5%",
+              width: "95%",
+              margin: "10px",
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <input
+              type="text"
+              style={{ width: "75%" }}
+              placeholder="댓글을 입력하세요"
+            />
+            <button>등록</button>
+          </div>
+        </CommentWrapper>
       </ListWrapper>
     </>
   );
@@ -20,7 +44,7 @@ function DetailBox() {
 
 const ListWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 80%;
   height: 65vh;
   justify-content: center;
@@ -28,6 +52,26 @@ const ListWrapper = styled.div`
   border: 1px solid;
   margin-top: 10px;
   overflow: scroll;
+`;
+
+const DetailWrapper = styled.div`
+  /* border: 1px solid; */
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CommentWrapper = styled.div`
+  /* border: 1px solid; */
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
 `;
 
 const CardImage = styled.div`

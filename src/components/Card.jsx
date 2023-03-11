@@ -39,7 +39,7 @@ function Card({ wish }) {
   );
 }
 
-const CardToDetail = styled.div``;
+// const CardToDetail = styled.div``;
 
 const CardWrapper = styled.div`
   width: 200px;

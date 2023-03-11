@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Form from "../components/Form";
-import List from "../components/List";
 import DetailBox from "../components/DetailBox";
 import { useNavigate } from "react-router-dom";
 
