@@ -43,8 +43,8 @@ function Card({ wish }) {
 
 const CardWrapper = styled.div`
   width: 200px;
-  height: 330px;
-  /* border: 1px solid; */
+  height: 300px;
+  border: 1px solid;
   overflow: hidden;
   margin: 10px;
   padding: 5px;

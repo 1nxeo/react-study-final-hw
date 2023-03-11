@@ -42,6 +42,7 @@ const ListHeader = styled.div`
   justify-items: center;
   font-size: 30px;
   font-weight: 800;
+  margin-top: 10px;
 `;
 
 const ListWrapper = styled.div`
@@ -52,14 +53,14 @@ const ListWrapper = styled.div`
   justify-content: space-around;
   /* border: 1px solid; */
   margin-top: 10px;
-  overflow: scroll;
 `;
 
 const ListBox = styled.div`
   /* border: 1px solid; */
-  width: 100%;
-  margin: 20px;
-  height: auto;
+  width: 600px;
+  margin: 10px;
+  height: 100% auto;
+  overflow: scroll;
 `;
 
 // const ListTitle = styled.div`
@@ -71,7 +72,7 @@ const Lists = styled.div`
   width: 100%;
   height: 100%;
   border: 1px solid transparent;
-  background-color: rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(0, 0, 0, 0.1); */
   display: flex;
   justify-content: space-between;
   flex-flow: row wrap;
