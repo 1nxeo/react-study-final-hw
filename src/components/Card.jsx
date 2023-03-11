@@ -12,15 +12,18 @@ function Card({ wish }) {
   // const switchWishHandler = (id) => {
   //   dispatch(switchWish(id));
   // };
+
+  // const toDetailHandler = (e) => {
+  //   if (e.target == e.currentTarget) {
+  //     navigate(`/detail/${wish.id}`);
+  //   }
+  // };
+
   console.log(wish);
   return (
-    <CardWrapper
-      key={wish.id}
-      onClick={(e) => {
-        navigate(`/detail/${wish.id}`);
-      }}
-    >
-      <CardImage></CardImage>
+    <CardWrapper key={wish.id}>
+      {/* <CardToDetail  /> */}
+      <CardImage onClick={(e) => navigate(`/detail/${wish.id}`)}></CardImage>
       <div>
         <p>{wish.contents}</p>
         <Button
@@ -35,6 +38,8 @@ function Card({ wish }) {
     </CardWrapper>
   );
 }
+
+const CardToDetail = styled.div``;
 
 const CardWrapper = styled.div`
   width: 200px;
