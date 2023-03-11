@@ -11,17 +11,17 @@ function DetailBox() {
         <DetailWrapper>
           <CardImage></CardImage>
           <h1>이거 사고싶다</h1>
-          <h4>상품 링크</h4>
+          <h3>상품 링크</h3>
           <p>코멘트</p>
         </DetailWrapper>
         <CommentWrapper>
           {" "}
-          <div style={{ height: "95%", margin: "10px" }}>
+          <div style={{ height: "92%", margin: "10px" }}>
             여기에 댓글이 들어갑니다
           </div>
           <div
             style={{
-              height: "5%",
+              height: "8%",
               width: "95%",
               margin: "10px",
               display: "flex",
@@ -79,8 +79,9 @@ const CardImage = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   color: transparent;
-  height: 300px;
-  width: 200px;
+  height: 350px;
+  width: 250px;
+  margin-top: 10px;
 `;
 
 export default DetailBox;
