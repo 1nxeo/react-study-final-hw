@@ -4,7 +4,11 @@ import styled from "styled-components";
 
 function Header() {
   const navigate = useNavigate();
-  return <StHeader onClick={(e) => navigate("/")}>@1nxeo Archive</StHeader>;
+  return (
+    <StHeader onClick={(e) => navigate("/")}>
+      <h2>@1nxeo Archive</h2>
+    </StHeader>
+  );
 }
 
 const StHeader = styled.div`

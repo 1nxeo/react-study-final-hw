@@ -49,6 +49,7 @@ const CardWrapper = styled.div`
   margin: 10px;
   padding: 5px;
   background-color: white;
+  font-size: small;
 `;
 
 const CardImage = styled.div`

@@ -29,12 +29,12 @@ function DetailBox() {
               alignItems: "center",
             }}
           >
-            <input
+            <StInput
               type="text"
               style={{ width: "75%" }}
               placeholder="댓글을 입력하세요"
             />
-            <button>등록</button>
+            <Button>등록</Button>
           </div>
         </CommentWrapper>
       </ListWrapper>
@@ -82,6 +82,12 @@ const CardImage = styled.div`
   height: 350px;
   width: 250px;
   margin-top: 10px;
+`;
+
+const StInput = styled.input`
+  width: 500px;
+  height: 30px;
+  border: 1px solid;
 `;
 
 export default DetailBox;

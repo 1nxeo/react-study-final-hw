@@ -4,10 +4,12 @@ import Footer from "../components/Footer";
 import Form from "../components/Form";
 import Header from "../components/Header";
 import List from "../components/List";
+import GlobalStyle from "../GlobalStyle";
 
 function Home() {
   return (
     <Wrapper>
+      <GlobalStyle />
       <Header />
       <Form />
       <List />
