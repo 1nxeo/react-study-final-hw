@@ -13,7 +13,7 @@ function List() {
       </ListHeader>
       <ListWrapper>
         {/* <h1>사고싶다</h1> */}
-        <ListBox>
+        <ListBox lined>
           {/* <h1>사고싶다</h1> */}
           <Lists>
             {wishes.map((item) =>
@@ -61,6 +61,7 @@ const ListBox = styled.div`
   margin: 10px;
   height: 100% auto;
   overflow: scroll;
+  border-right: ${(props) => (props.lined ? "1px solid black" : null)};
 `;
 
 // const ListTitle = styled.div`

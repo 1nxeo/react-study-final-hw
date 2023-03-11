@@ -42,7 +42,7 @@ function Card({ wish }) {
 // const CardToDetail = styled.div``;
 
 const CardWrapper = styled.div`
-  width: 200px;
+  width: 190px;
   height: 300px;
   border: 1px solid;
   overflow: hidden;

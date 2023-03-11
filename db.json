@@ -9,6 +9,7 @@
     "comments" :[
         {
             "id":1,
+            "wishId":1,
             "nickname":"wow",
             "conmments":"나도 사고싶다"
         }
