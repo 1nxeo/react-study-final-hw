@@ -1,12 +1,53 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Button from "./Button";
 import Comments from "./Comments";
 import Modal from "./Modal";
+import { useSelector, useDispatch } from "react-redux";
+import { __getWishes } from "../redux/modules/wishlists";
+import axios from "axios";
+import { CheerioAPI } from "cheerio";
 
 function DetailBox() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { wishes, isLoading, error } = useSelector((state) => state.wishlists);
+  // const [wishes, setWishes] = useState([]);
+  const [crawledItem, setCrawledItem] = useState([]);
+
+  // const fetchTodos = async () => {
+  //   const { data } = await axios.get("http://localhost:4000/wishes");
+  //   setWishes(data);
+  // };
+  // const todo = useSelector((state) => state.todos.todo);
+  // const { id } = useParams;
+
+  // useEffect(() => {
+  //   dispatch(getTodoByID(id));
+  // }, [dispatch, id]);
+
+  const { id } = useParams();
+  const wish = wishes.find((item) => {
+    return String(item.id) === String(id);
+  });
+
+  const link = wish.url;
+
+  console.log(link);
+
+  useEffect(() => {
+    dispatch(__getWishes());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <Message>Loading...</Message>;
+  }
+
+  if (error) {
+    return <Message>{error.message}</Message>;
+  }
+
   return (
     <>
       <ListWrapper>
@@ -19,13 +60,25 @@ function DetailBox() {
             buttonGap="10px"
             position="left"
           />
-          <CardImage></CardImage>
-          <h1>이거 사고싶다</h1>
-          <h3>상품 링크</h3>
-          <p>코멘트</p>
+          <CardImage
+          // style={{ backgroundImage: `url(${crawledItem.img})` }}
+          ></CardImage>
+          <h2 style={{ margin: "5px" }}>
+            {/* {crawledItem.title} */}
+            뭐꼬
+          </h2>
+          <Button
+            style={{ width: "100px", height: "40px" }}
+            onClick={() => {
+              window.open(link);
+            }}
+          >
+            보러가기
+          </Button>
+          {/* <h3>{wish.url}</h3> */}
+          <p>{wish.contents}</p>
         </DetailWrapper>
         <CommentWrapper>
-          {" "}
           <Comments />
           <div
             style={{
@@ -49,6 +102,20 @@ function DetailBox() {
     </>
   );
 }
+
+const Message = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  height: 65vh;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid; */
+  margin-top: 10px;
+  font-size: larger;
+  font-weight: 900;
+  color: red;
+`;
 
 const ListWrapper = styled.div`
   display: flex;

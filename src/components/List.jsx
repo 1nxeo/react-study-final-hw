@@ -14,7 +14,15 @@ function List() {
   // const fetchTodos = async () => {
   //   const { data } = await axios.get("http://localhost:4000/wishes");
   //   setWishes(data);
-  // };
+  // // };
+
+  //   const dispatch = useDispatch();
+  // const todo = useSelector((state) => state.todos.todo);
+  // const { id } = useParams;
+
+  // useEffect(() => {
+  //   dispatch(getTodoByID(id));
+  // }, [dispatch, id]);
 
   useEffect(() => {
     dispatch(__getWishes());
