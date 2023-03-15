@@ -15,7 +15,7 @@ export const __getWishes = createAsyncThunk(
     "wishes/getWishes",
     async (payload, thunkAPI) => {
         try {
-          const data = await axios.get("http://localhost:4000/wishes");
+          const data = await axios.get(`${process.env.REACT_APP_SERVER_URL}/wishes`);
           return thunkAPI.fulfillWithValue(data.data)
         } catch (error) {
           return thunkAPI.rejectWithValue(error)

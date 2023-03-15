@@ -4,6 +4,7 @@ import Button from "./Button";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addWish } from "../redux/modules/wishlists";
+import api from "../axios/api";
 
 function Form() {
   const dispatch = useDispatch();
@@ -11,11 +12,12 @@ function Form() {
     url: "",
     contents: "",
     isDone: false,
+    comments: null,
   });
 
   const [wishes, setWishes] = useState([]);
   const fetchTodos = async () => {
-    const { data } = await axios.get("http://localhost:4000/wishes");
+    const { data } = await api.get("/wishes");
     setWishes(data);
   };
   useEffect(() => {
@@ -24,7 +26,7 @@ function Form() {
 
   const onSubmitHandler = async (wish) => {
     dispatch(addWish(wish));
-    await axios.post("http://localhost:4000/wishes", wish);
+    await api.post("/wishes", wish);
     fetchTodos();
   };
 
@@ -38,9 +40,9 @@ function Form() {
           url: "",
           contents: "",
           isDone: false,
+          comments: null,
         });
         setWishes([...wishes, wish]);
-        window.location.reload();
       }}
     >
       <StInput

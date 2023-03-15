@@ -7,6 +7,8 @@ import Modal from "./Modal";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { __getWishes } from "../redux/modules/wishlists";
+import api from "../axios/api";
+import { addComment } from "../redux/modules/comments";
 
 // import { CheerioAPI } from "cheerio";
 
@@ -18,14 +20,18 @@ function DetailBox() {
     return String(item.id) === String(id);
   });
 
-  const [newComments, setNewComments] = useState({});
+  const [newComments, setNewComments] = useState({
+    body: "",
+    postId: wish.id,
+  });
 
   useEffect(() => {
     dispatch(__getWishes());
   }, [dispatch]);
 
   const commentSaveHandler = async (item) => {
-    await axios.post("http://localhost:4000/comments", item);
+    await api.post("/comments", item);
+    addComment(item);
     alert("댓글 등록 완료!");
   };
 
@@ -42,6 +48,7 @@ function DetailBox() {
       <ListWrapper>
         <DetailWrapper>
           <Modal
+            key={wish.id}
             wish={wish}
             buttonName={"수정"}
             buttonSize="large"
@@ -50,7 +57,7 @@ function DetailBox() {
             position="left"
           />
           <CardImage></CardImage>
-          <h3 style={{ margin: "5px" }}>여기에 상품 이름이 들어갑니다.</h3>
+          {/* <h3 style={{ margin: "5px" }}>여기에 상품 이름이 들어갑니다.</h3> */}
           <Button
             style={{ width: "90px", height: "30px" }}
             onClick={() => {
@@ -62,7 +69,7 @@ function DetailBox() {
           <p>{wish.contents}</p>
         </DetailWrapper>
         <CommentWrapper>
-          <Comments wish={wish} />
+          <Comments key={wish.id} wish={wish} />
           <div
             style={{
               height: "8%",

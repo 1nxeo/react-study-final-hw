@@ -7,13 +7,14 @@ import DetailBox from "../components/DetailBox";
 import { useNavigate } from "react-router-dom";
 import GlobalStyle from "../GlobalStyle";
 import axios from "axios";
+import api from "../axios/api";
 
 function Detail() {
   const navigate = useNavigate();
 
   const [wishes, setWishes] = useState([]);
   const fetchTodos = async () => {
-    const { data } = await axios.get("http://localhost:4000/wishes");
+    const { data } = await api.get("/wishes");
     setWishes(data);
   };
 

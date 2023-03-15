@@ -4,6 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { updateWish } from "../redux/modules/wishlists";
+import api from "../axios/api";
 
 const Modal = ({ wish, buttonName, bc, fontColor, buttonSize, margin }) => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Modal = ({ wish, buttonName, bc, fontColor, buttonSize, margin }) => {
 
   const onSubmitHandler = async (editWish) => {
     dispatch(updateWish(editWish));
-    await axios.patch(`http://localhost:4000/wishes/${editWish.id}`, editWish);
+    await api.patch(`/wishes/${editWish.id}`, editWish);
   };
 
   return (

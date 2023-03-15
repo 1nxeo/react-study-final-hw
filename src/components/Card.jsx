@@ -6,6 +6,8 @@ import styled from "styled-components";
 import Button from "./Button";
 import axios from "axios";
 import { switchWish, deleteWish } from "../redux/modules/wishlists";
+import api from "../axios/api";
+import { deleteComment } from "../redux/modules/comments";
 
 function Card({ wish }) {
   const dispatch = useDispatch();
@@ -13,12 +15,12 @@ function Card({ wish }) {
 
   const onClickDeleteButtonHandler = (wish) => {
     dispatch(deleteWish(wish.id));
-    axios.delete(`http://localhost:4000/wishes/${wish.id}`);
+    api.delete(`/wishes/${wish.id}`);
   };
 
   const onClickDoneButtonHandler = (wish) => {
     dispatch(switchWish(wish.id));
-    axios.patch(`http://localhost:4000/wishes/${wish.id}`, {
+    api.patch(`/wishes/${wish.id}`, {
       ...wish,
       isDone: !wish.isDone,
     });

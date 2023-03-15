@@ -15,7 +15,7 @@ export const __getComments = createAsyncThunk(
     "comments/getComments",
     async (payload, thunkAPI) => {
       try{
-        const data = await axios.get("http://localhost:4000/comments");
+        const data = await axios.get(`${process.env.REACT_APP_SERVER_URL}/comments`);
         return thunkAPI.fulfillWithValue(data.data)
       }catch(err){
         return thunkAPI.rejectWithValue(err)
@@ -28,7 +28,11 @@ const commentSlice = createSlice({
     name:'comments',
     initialState,
     reducers:{
-        // addComment : (state, action) => {return {...state, wishes:[...state.wishes, action.payload]}},
+        addComment : (state, action) => {return {...state, wishes:[...state.wishes, action.payload]}},
+        deleteComment : (state, action) => {
+          const newList = state.comments.filter((item)=>item.postId !== action.payload)
+          return {...state, wishes:newList}
+        },
     },
     extraReducers:{
           [__getComments.pending]: (state) => {
@@ -36,7 +40,7 @@ const commentSlice = createSlice({
           },
           [__getComments.fulfilled]: (state, action) => {
             state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-            state.wishes = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+            state.comments = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
           },
           [__getComments.rejected]: (state, action) => {
             state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
@@ -46,5 +50,5 @@ const commentSlice = createSlice({
 
 })
 
-// export const {} = wishSlice.actions;
+export const {addComment,deleteComment} = commentSlice.actions;
 export default commentSlice.reducer;
