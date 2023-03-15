@@ -40,6 +40,7 @@ function DetailBox() {
   const commentSaveHandler = async (item) => {
     await axios.post("http://localhost:4000/comments", item);
     alert("댓글 등록 완료!");
+    window.location.reload();
   };
 
   if (isLoading) {

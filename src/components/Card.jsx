@@ -5,21 +5,28 @@ import styled from "styled-components";
 // import { switchWish } from "../redux/modules/wishlists";
 import Button from "./Button";
 import axios from "axios";
+import { switchWish, deleteWish } from "../redux/modules/wishlists";
 
 function Card({ wish }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onClickDeleteButtonHandler = (wishId) => {
-    axios.delete(`http://localhost:4000/wishes/${wishId}`);
+  const onClickDeleteButtonHandler = (wish) => {
+    dispatch(deleteWish(wish.id));
+    axios.delete(`http://localhost:4000/wishes/${wish.id}`);
   };
 
   const onClickDoneButtonHandler = (wish) => {
+    dispatch(switchWish(wish.id));
     axios.patch(`http://localhost:4000/wishes/${wish.id}`, {
       ...wish,
       isDone: !wish.isDone,
     });
   };
+
+  // useEffect(() => {
+  //   dispatch(__getWishes());
+  // }, [dispatch]);
 
   console.log(wish);
   return (
@@ -37,7 +44,7 @@ function Card({ wish }) {
         </Button>
         <Button
           onClick={() => {
-            onClickDeleteButtonHandler(wish.id);
+            onClickDeleteButtonHandler(wish);
             alert("삭제 완료!");
           }}
         >

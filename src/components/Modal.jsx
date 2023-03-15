@@ -20,6 +20,7 @@ const Modal = ({ wish, buttonName, bc, fontColor, buttonSize, margin }) => {
 
   const onSubmitHandler = async (editWish) => {
     await axios.patch(`http://localhost:4000/wishes/${editWish.id}`, editWish);
+    window.location.reload();
   };
 
   return (

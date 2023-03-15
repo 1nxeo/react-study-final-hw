@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addWish } from "../redux/modules/wishlists";
 
 function Form() {
+  const dispatch = useDispatch();
   const [wish, setWish] = useState({
     url: "",
     contents: "",
@@ -22,6 +25,7 @@ function Form() {
 
   const onSubmitHandler = async (wish) => {
     //1.  이때 todos는 [{투두하나}]임
+    dispatch(addWish(wish));
     await axios.post("http://localhost:4000/wishes", wish); // 이때 서버에 있는 todos도 [{투두하나}]임
     fetchTodos();
   };
@@ -42,6 +46,7 @@ function Form() {
           isDone: false,
         });
         setWishes([...wishes, wish]);
+        window.location.reload();
       }}
     >
       <StInput

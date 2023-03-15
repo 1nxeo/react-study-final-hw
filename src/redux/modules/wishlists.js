@@ -33,6 +33,10 @@ const wishSlice =createSlice({
         switchWish : (state, action) => {
             const newList = state.wishes.map((item)=>item.id === action.payload ? {...item, isDone: !item.isDone}:item)
             return {...state, wishes:newList}
+        },
+        deleteWish : (state, action) => {
+          const newList = state.wishes.filter((item)=>item.id !== action.payload)
+          return {...state, wishes:newList}
         }
     },
     extraReducers:{
@@ -51,5 +55,5 @@ const wishSlice =createSlice({
 
 })
 
-// export const { addWish ,switchWish} = wishSlice.actions;
+export const { addWish ,switchWish, deleteWish} = wishSlice.actions;
 export default wishSlice.reducer;
