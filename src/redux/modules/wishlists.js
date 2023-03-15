@@ -10,19 +10,6 @@ const initialState = {
     error:null,
 };
 
-
-
-// export const __getComments = createAsyncThunk(
-//   "comments/getComments",
-//   async (payload, thunkAPI) => {
-//     try{
-//       const data = await axios.get(`${process.env.REACT_APP_SERVER_URL}/wishes`);
-//       return thunkAPI.fulfillWithValue(data.data.comments)
-//     }catch(err){
-//       return thunkAPI.rejectWithValue(err)
-//     }
-//   }
-// )
 export const __getWishes = createAsyncThunk(
     "wishes/getWishes",
     async (payload, thunkAPI) => {
@@ -35,44 +22,156 @@ export const __getWishes = createAsyncThunk(
       }
   );
 
+  export const __addWishes = createAsyncThunk(
+    "wishes/addWishes",
+    async (payload, thunkAPI) => {
+        try {
+          await axios.post(`${process.env.REACT_APP_SERVER_URL}/wishes`, payload);
+          return thunkAPI.fulfillWithValue(payload)
+        } catch (error) {
+          return thunkAPI.rejectWithValue(error)
+        }
+      }
+  );
+
+
+  export const __deleteWishes = createAsyncThunk(
+    "wishes/deleteWishes",
+    async (payload, thunkAPI) => {
+        try {
+          await axios.delete(`${process.env.REACT_APP_SERVER_URL}/wishes/${payload}`);
+          return thunkAPI.fulfillWithValue(payload)
+        } catch (error) {
+          return thunkAPI.rejectWithValue(error)
+        }
+      }
+  );
+
+  export const __switchWishes = createAsyncThunk(
+    "wishes/switchWishes",
+    async (payload, thunkAPI) => {
+        try {
+          await axios.patch(`${process.env.REACT_APP_SERVER_URL}/wishes/${payload.id}`, payload);
+          return thunkAPI.fulfillWithValue(payload)
+        } catch (error) {
+          return thunkAPI.rejectWithValue(error)
+        }
+      }
+  );
+
+  export const __updateWishes = createAsyncThunk(
+    "wishes/updateWishes",
+    async (payload, thunkAPI) => {
+        try {
+          await axios.patch(`${process.env.REACT_APP_SERVER_URL}/wishes/${payload.id}`, payload);
+          return thunkAPI.fulfillWithValue(payload)
+        } catch (error) {
+          return thunkAPI.rejectWithValue(error)
+        }
+      }
+  );
+
+  // export const __addComments = createAsyncThunk(
+  //   "wishes/addComments",
+  //   async (payload, thunkAPI) => {
+  //       try {
+  //         await axios.post(`${process.env.REACT_APP_SERVER_URL}/wishes/${payload.postId}`, payload);
+  //         return thunkAPI.fulfillWithValue(payload)
+  //       } catch (error) {
+  //         return thunkAPI.rejectWithValue(error)
+  //       }
+  //     }
+  // );
+
+
 
 
 const wishSlice =createSlice({
     name:'wishes',
     initialState,
     reducers:{
-        addWish : (state, action) => {return {...state, wishes:[...state.wishes, action.payload]}},
-        switchWish : (state, action) => {
-            const newList = state.wishes.map((item)=>item.id === action.payload ? {...item, isDone: !item.isDone}:item)
-            return {...state, wishes:newList}
-        },
-        deleteWish : (state, action) => {
-          const newList = state.wishes.filter((item)=>item.id !== action.payload)
-          return {...state, wishes:newList}
-        },
-        updateWish : (state, action) => {
-          const editId = action.payload.id;
-          const editTargetIndex = state.wishes.findIndex((item)=>item.id === editId)
-          const editList = [...state.wishes]
-          editList.splice(editTargetIndex,1, action.payload)
-          return {...state, wishes:editList}
-        }
+        // addWish : (state, action) => {return {...state, wishes:[...state.wishes, action.payload]}},
+        // switchWish : (state, action) => {
+        //     const newList = state.wishes.map((item)=>item.id === action.payload ? {...item, isDone: !item.isDone}:item)
+        //     return {...state, wishes:newList}
+        // },
+        // deleteWish : (state, action) => {
+        //   const newList = state.wishes.filter((item)=>item.id !== action.payload)
+        //   return {...state, wishes:newList}
+        // },
+        // updateWish : (state, action) => {
+        //   const editId = action.payload.id;
+        //   const editTargetIndex = state.wishes.findIndex((item)=>item.id === editId)
+        //   const editList = [...state.wishes]
+        //   editList.splice(editTargetIndex,1, action.payload)
+        //   return {...state, wishes:editList}
+        // }
     },
     extraReducers:{
         [__getWishes.pending]: (state) => {
-            state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
+            state.isLoading = true; 
           },
           [__getWishes.fulfilled]: (state, action) => {
-            state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-            state.wishes = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+            state.isLoading = false; 
+            state.wishes = action.payload; 
           },
           [__getWishes.rejected]: (state, action) => {
-            state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
-            state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
+            state.isLoading = false; 
+            state.error = action.payload;
+          },
+          [__deleteWishes.pending]: (state) => {
+            state.isLoading = true;
+          },
+          [__deleteWishes.fulfilled]: (state, action) => {
+            const newState = state.wishes.filter((item)=>item.id !== action.payload)
+            state.isLoading = false;
+            state.wishes = newState;
+          },
+          [__deleteWishes.rejected]: (state, action) => {
+            state.isLoading = false; 
+            state.error = action.payload; 
+          },
+          [__switchWishes.pending]: (state) => {
+            state.isLoading = true;
+          },
+          [__switchWishes.fulfilled]: (state, action) => {
+            const newState = state.wishes.map((item)=>item.id === action.payload.id ? {...item, isDone: !item.isDone}:item)
+            state.isLoading = false;
+            state.wishes = newState;
+          },
+          [__switchWishes.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload; 
+          },
+          [__addWishes.pending]: (state) => {
+            state.isLoading = true;
+          },
+          [__addWishes.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.wishes =[...state.wishes, action.payload];
+          },
+          [__addWishes.rejected]: (state, action) => {
+            state.isLoading = false; 
+            state.error = action.payload; 
+          },
+          [__updateWishes.pending]: (state) => {
+            state.isLoading = true;
+          },
+          [__updateWishes.fulfilled]: (state, action) => {
+            const editId = action.payload.id;
+          const editTargetIndex = state.wishes.findIndex((item)=>item.id === editId)
+          const editList = [...state.wishes]
+          editList.splice(editTargetIndex,1, action.payload)
+            state.isLoading = false;
+            state.wishes = editList
+          },
+          [__updateWishes.rejected]: (state, action) => {
+            state.isLoading = false; 
+            state.error = action.payload; 
           },
     }
 
 })
 
-export const { addWish ,switchWish, deleteWish, updateWish} = wishSlice.actions;
+// export const { addWish ,switchWish, deleteWish, updateWish} = wishSlice.actions;
 export default wishSlice.reducer;

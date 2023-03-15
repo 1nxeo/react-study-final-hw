@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import styled from "styled-components";
-import axios from "axios";
 import { useDispatch } from "react-redux";
-import { updateWish } from "../redux/modules/wishlists";
-import api from "../axios/api";
+import { __updateWishes } from "../redux/modules/wishlists";
 
 const Modal = ({ wish, buttonName, bc, fontColor, buttonSize, margin }) => {
   const dispatch = useDispatch();
@@ -23,8 +21,7 @@ const Modal = ({ wish, buttonName, bc, fontColor, buttonSize, margin }) => {
   };
 
   const onSubmitHandler = async (editWish) => {
-    dispatch(updateWish(editWish));
-    await api.patch(`/wishes/${editWish.id}`, editWish);
+    dispatch(__updateWishes(editWish));
   };
 
   return (
@@ -63,7 +60,6 @@ const Modal = ({ wish, buttonName, bc, fontColor, buttonSize, margin }) => {
                   type="text"
                   onChange={(e) => {
                     setEditWish({ ...editWish, url: e.target.value });
-                    console.log(editWish);
                   }}
                   placeholder="수정할 url"
                 />

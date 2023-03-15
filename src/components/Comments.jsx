@@ -1,39 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { __getComments } from "../redux/modules/comments";
-import axios from "axios";
+import Button from "./Button";
 
-function Comments({ wish }) {
+function Comments({ wish, comments }) {
   const dispatch = useDispatch();
-
-  const { comments, isLoading, error } = useSelector((state) => state.comments);
 
   // const fetchComments = async () => {
   //   const { data } = await axios.get("http://localhost:4000/comments");
   //   console.log("data", data);
   // };
-
-  useEffect(() => {
-    dispatch(__getComments());
-  }, [dispatch]);
-
-  if (isLoading) {
-    return <Message>Loading...</Message>;
-  }
-
-  if (error) {
-    return <Message>{error.message}</Message>;
-  }
-
   return (
     <StCommentWrapper>
-      {comments.map((item) =>
-        item.postId == wish.id ? <div>{item.body}</div> : null
-      )}
-      {/* {comments.map((item) => {item.id === 
-        return <div>{item.body}</div>;
-      })} */}
+      <>
+        {comments.map((item) => (
+          <div key={item.id}>
+            {item.body}{" "}
+            <Button style={{ width: "38px", height: "20px" }}>삭제</Button>
+          </div>
+        ))}
+      </>
     </StCommentWrapper>
   );
 }

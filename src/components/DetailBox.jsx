@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Button from "./Button";
 import Comments from "./Comments";
 import Modal from "./Modal";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-import { __getWishes } from "../redux/modules/wishlists";
-import api from "../axios/api";
 import { addComment } from "../redux/modules/comments";
 
 // import { CheerioAPI } from "cheerio";
@@ -19,19 +16,19 @@ function DetailBox() {
   const wish = wishes.find((item) => {
     return String(item.id) === String(id);
   });
+  const comments = [...wish.comments];
 
   const [newComments, setNewComments] = useState({
     body: "",
     postId: wish.id,
   });
 
-  useEffect(() => {
-    dispatch(__getWishes());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(__getWishes());
+  // }, [dispatch]);
 
   const commentSaveHandler = async (item) => {
-    await api.post("/comments", item);
-    addComment(item);
+    dispatch(addComment(item));
     alert("댓글 등록 완료!");
   };
 
@@ -69,7 +66,7 @@ function DetailBox() {
           <p>{wish.contents}</p>
         </DetailWrapper>
         <CommentWrapper>
-          <Comments key={wish.id} wish={wish} />
+          <Comments key={wish.id} wish={wish} comments={comments} />
           <div
             style={{
               height: "8%",
@@ -83,17 +80,15 @@ function DetailBox() {
             <StInput
               type="text"
               style={{ width: "75%" }}
-              placeholder="댓글을 입력하세요"
-              onChange={(e) =>
-                setNewComments({ ...newComments, body: e.target.value })
-              }
+              placeholder="댓글 기능 준비중..."
+              value={newComments.body}
+              onChange={(e) => setNewComments({ body: e.target.value })}
             />
             <Button
               onClick={(e) => {
                 commentSaveHandler(newComments);
                 setNewComments({
                   body: "",
-                  postId: wish.id,
                 });
               }}
             >

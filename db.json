@@ -7,54 +7,40 @@
       "isDone": false,
       "comments": [
         {
-          "id": 1,
           "body": "넘비쌈 ㅎ 패딩하나에 340"
         },
         {
-          "body": "aaaa",
-          "id": 2
+          "body": "aaaa"
         }
       ]
     },
     {
-      "url": "https://smartstore.naver.com/sia_euro/products/8180290669?NaPm=ct%3Dlf9arhco%7Cci%3D6e753d1e310dbdec094d268092c5cf34cb30d26f%7Ctr%3Dsls%7Csn%3D4500832%7Chk%3D1df958202f1f94ce5d788789e842df382b45aa6a",
-      "contents": "몽클..레어.... 너... 이자식...",
+      "url": "https://smartstore.naver.com/sia_euro/products/8180290669?NaPm=ct%3Dlf9trsds%7Cci%3D40cfd241d9af46fc27efde50a5d6a3f2c2cc3671%7Ctr%3Dsls%7Csn%3D4500832%7Chk%3D5c9bf259ea67a5572e90da2afc75237996ea7eea",
+      "contents": "몽클레어.. 너 이놈 .... 사랑.. 했다...",
       "isDone": true,
       "id": 2,
       "comments": [
         {
-          "id": 1,
-          "body": "넘비쌈 ㅎ 패딩하나에 340"
+          "body": "넘비쌈 ㅎ"
         },
         {
-          "body": "bbbb",
-          "id": 2
+          "body": "aaaa"
         }
       ]
     },
     {
-      "url": "움무뭄뭄",
-      "contents": "왐와맘마맘",
-      "isDone": false,
+      "url": "aa",
+      "contents": "bb",
+      "isDone": true,
       "comments": null,
       "id": 3
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "와 사고싶다 ㅋㅋ",
-      "postId": 1
     },
     {
-      "id": 2,
-      "body": "넘비쌈 ㅎ 패딩하나에 340",
-      "postId": 2
-    },
-    {
-      "body": "aaaa",
-      "postId": 2,
-      "id": 3
+      "url": "ababab",
+      "contents": "abababababab",
+      "isDone": false,
+      "comments": null,
+      "id": 4
     }
   ],
   "profile": {

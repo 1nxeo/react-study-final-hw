@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "./Button";
-import axios from "axios";
 import { useDispatch } from "react-redux";
-import { addWish } from "../redux/modules/wishlists";
-import api from "../axios/api";
+import { __addWishes } from "../redux/modules/wishlists";
 
 function Form() {
   const dispatch = useDispatch();
@@ -15,19 +13,14 @@ function Form() {
     comments: null,
   });
 
-  const [wishes, setWishes] = useState([]);
-  const fetchTodos = async () => {
-    const { data } = await api.get("/wishes");
-    setWishes(data);
-  };
-  useEffect(() => {
-    fetchTodos();
-  }, []);
-
   const onSubmitHandler = async (wish) => {
-    dispatch(addWish(wish));
-    await api.post("/wishes", wish);
-    fetchTodos();
+    await dispatch(__addWishes(wish));
+    setWish({
+      url: "",
+      contents: "",
+      isDone: false,
+      comments: null,
+    });
   };
 
   return (
@@ -42,20 +35,17 @@ function Form() {
           isDone: false,
           comments: null,
         });
-        setWishes([...wishes, wish]);
       }}
     >
       <StInput
         type="text"
         placeholder="상품 url"
-        label="url"
-        // value={url}
+        value={wish.url}
         required
         onChange={(e) => {
-          const { value } = e.target;
           setWish({
             ...wish,
-            url: value,
+            url: e.target.value,
           });
         }}
       />
@@ -63,13 +53,12 @@ function Form() {
         type="text"
         placeholder="why?"
         label="내용"
-        // value={contents}
+        value={wish.contents}
         required
         onChange={(e) => {
-          const { value } = e.target;
           setWish({
             ...wish,
-            contents: value,
+            contents: e.target.value,
           });
         }}
       />

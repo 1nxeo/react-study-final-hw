@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
 import Button from "./Button";
-import axios from "axios";
-import { switchWish, deleteWish } from "../redux/modules/wishlists";
-import api from "../axios/api";
-import { deleteComment } from "../redux/modules/comments";
+import { __deleteWishes, __switchWishes } from "../redux/modules/wishlists";
 
 function Card({ wish }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onClickDeleteButtonHandler = (wish) => {
-    dispatch(deleteWish(wish.id));
-    api.delete(`/wishes/${wish.id}`);
+  const onClickDeleteButtonHandler = (wishId) => {
+    dispatch(__deleteWishes(wishId));
   };
 
   const onClickDoneButtonHandler = (wish) => {
-    dispatch(switchWish(wish.id));
-    api.patch(`/wishes/${wish.id}`, {
+    const doneItem = {
       ...wish,
       isDone: !wish.isDone,
-    });
+    };
+    dispatch(__switchWishes(doneItem));
   };
 
   return (
@@ -41,7 +36,7 @@ function Card({ wish }) {
         </Button>
         <Button
           onClick={() => {
-            onClickDeleteButtonHandler(wish);
+            onClickDeleteButtonHandler(wish.id);
             alert("삭제 완료!");
           }}
         >

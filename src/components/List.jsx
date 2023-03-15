@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Card from "./Card";
 // import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { __getWishes } from "../redux/modules/wishlists";
+import useFetchData from "../hooks/useFetchData";
 
 function List() {
   const dispatch = useDispatch();
   const { wishes, isLoading, error } = useSelector((state) => state.wishlists);
+  const dpWishes = JSON.stringify([...wishes]);
 
+  // const {dpWishes, __getWishes} = useFetchData()
   useEffect(() => {
     dispatch(__getWishes());
-  }, [dispatch]);
+  }, [dpWishes]);
 
   if (isLoading) {
     return <Message>Loading...</Message>;
