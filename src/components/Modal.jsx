@@ -1,14 +1,27 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import styled from "styled-components";
+import axios from "axios";
 
-const Modal = ({ buttonName, contents, bc, fontColor, buttonSize, margin }) => {
+const Modal = ({ wish, buttonName, bc, fontColor, buttonSize, margin }) => {
   const [open, setOpen] = useState(false);
+  const [editWish, setEditWish] = useState({
+    id: wish.id,
+    url: wish.url,
+    contents: wish.contents,
+    isDone: wish.isDone,
+  });
+
   const handleClickOutside = (event) => {
     if (event.target === event.currentTarget) {
       setOpen(false);
     }
   };
+
+  const onSubmitHandler = async (editWish) => {
+    await axios.patch(`http://localhost:4000/wishes/${editWish.id}`, editWish);
+  };
+
   return (
     <>
       <Button
@@ -26,7 +39,14 @@ const Modal = ({ buttonName, contents, bc, fontColor, buttonSize, margin }) => {
         <StModal onClick={handleClickOutside}>
           <ModalSection>
             <CloseBtn onClick={() => setOpen((pre) => !pre)}>X</CloseBtn>
-            <ModalForm>
+            <ModalForm
+              onSubmit={(e) => {
+                e.preventDefault();
+                onSubmitHandler(editWish);
+                alert("수정완료!");
+                setOpen((pre) => !pre);
+              }}
+            >
               <div
                 style={{
                   display: "flex",
@@ -34,7 +54,14 @@ const Modal = ({ buttonName, contents, bc, fontColor, buttonSize, margin }) => {
                 }}
               >
                 <labe> URL : </labe>
-                <StInput type="text" />
+                <StInput
+                  type="text"
+                  onChange={(e) => {
+                    setEditWish({ ...editWish, url: e.target.value });
+                    console.log(editWish);
+                  }}
+                  placeholder="수정할 url"
+                />
               </div>
               <div
                 style={{
@@ -48,6 +75,10 @@ const Modal = ({ buttonName, contents, bc, fontColor, buttonSize, margin }) => {
                     height: "50px",
                   }}
                   type="text"
+                  onChange={(e) => {
+                    setEditWish({ ...editWish, contents: e.target.value });
+                  }}
+                  placeholder="수정할 내용"
                 />
               </div>
               <Button style={{ width: "100px", marginTop: "15px" }}>
@@ -95,7 +126,7 @@ const CloseBtn = styled.button`
   margin: 5px;
 `;
 
-const ModalForm = styled.div`
+const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;

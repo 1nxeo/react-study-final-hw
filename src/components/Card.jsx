@@ -14,6 +14,13 @@ function Card({ wish }) {
     axios.delete(`http://localhost:4000/wishes/${wishId}`);
   };
 
+  const onClickDoneButtonHandler = (wish) => {
+    axios.patch(`http://localhost:4000/wishes/${wish.id}`, {
+      ...wish,
+      isDone: !wish.isDone,
+    });
+  };
+
   console.log(wish);
   return (
     <CardWrapper key={wish.id}>
@@ -23,7 +30,7 @@ function Card({ wish }) {
         <Button
           onClick={() => {
             alert(`${wish.isDone ? "에라이" : "아좌잣"}`);
-            // dispatch(switchWish(wish.id));
+            onClickDoneButtonHandler(wish);
           }}
         >
           {wish.isDone ? "못삼" : "삼"}

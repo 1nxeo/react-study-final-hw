@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Button from "./Button";
 import Comments from "./Comments";
 import Modal from "./Modal";
 import { useSelector, useDispatch } from "react-redux";
-import { __getWishes } from "../redux/modules/wishlists";
 import axios from "axios";
-import { CheerioAPI } from "cheerio";
+import { __getWishes } from "../redux/modules/wishlists";
+
+// import { CheerioAPI } from "cheerio";
 
 function DetailBox() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { id } = useParams();
   const { wishes, isLoading, error } = useSelector((state) => state.wishlists);
-  // const [wishes, setWishes] = useState([]);
-  const [crawledItem, setCrawledItem] = useState([]);
+  const wish = wishes.find((item) => {
+    return String(item.id) === String(id);
+  });
+
+  console.log(wish);
+
+  const [newComments, setNewComments] = useState({});
 
   // const fetchTodos = async () => {
   //   const { data } = await axios.get("http://localhost:4000/wishes");
@@ -27,18 +33,14 @@ function DetailBox() {
   //   dispatch(getTodoByID(id));
   // }, [dispatch, id]);
 
-  const { id } = useParams();
-  const wish = wishes.find((item) => {
-    return String(item.id) === String(id);
-  });
-
-  const link = wish.url;
-
-  console.log(link);
-
   useEffect(() => {
     dispatch(__getWishes());
   }, [dispatch]);
+
+  const commentSaveHandler = async (item) => {
+    await axios.post("http://localhost:4000/comments", item);
+    alert("댓글 등록 완료!");
+  };
 
   if (isLoading) {
     return <Message>Loading...</Message>;
@@ -53,33 +55,27 @@ function DetailBox() {
       <ListWrapper>
         <DetailWrapper>
           <Modal
+            wish={wish}
             buttonName={"수정"}
-            contents={"안녕하세요"}
             buttonSize="large"
             margin="15px"
             buttonGap="10px"
             position="left"
           />
-          <CardImage
-          // style={{ backgroundImage: `url(${crawledItem.img})` }}
-          ></CardImage>
-          <h2 style={{ margin: "5px" }}>
-            {/* {crawledItem.title} */}
-            뭐꼬
-          </h2>
+          <CardImage></CardImage>
+          <h3 style={{ margin: "5px" }}>여기에 상품 이름이 들어갑니다.</h3>
           <Button
-            style={{ width: "100px", height: "40px" }}
+            style={{ width: "90px", height: "30px" }}
             onClick={() => {
-              window.open(link);
+              window.open(wish.url);
             }}
           >
             보러가기
           </Button>
-          {/* <h3>{wish.url}</h3> */}
           <p>{wish.contents}</p>
         </DetailWrapper>
         <CommentWrapper>
-          <Comments />
+          <Comments wish={wish} />
           <div
             style={{
               height: "8%",
@@ -94,8 +90,21 @@ function DetailBox() {
               type="text"
               style={{ width: "75%" }}
               placeholder="댓글을 입력하세요"
+              onChange={(e) =>
+                setNewComments({ ...newComments, body: e.target.value })
+              }
             />
-            <Button>등록</Button>
+            <Button
+              onClick={(e) => {
+                commentSaveHandler(newComments);
+                setNewComments({
+                  body: "",
+                  postId: wish.id,
+                });
+              }}
+            >
+              등록
+            </Button>
           </div>
         </CommentWrapper>
       </ListWrapper>

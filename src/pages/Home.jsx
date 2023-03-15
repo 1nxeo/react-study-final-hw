@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import List from "../components/List";
 import GlobalStyle from "../GlobalStyle";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 
 function Home() {
   const navigate = useNavigate();

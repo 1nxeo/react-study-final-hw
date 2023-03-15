@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "./Card";
 // import axios from "axios";
@@ -6,23 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getWishes } from "../redux/modules/wishlists";
 
 function List() {
-  // const wishes = useSelector((state) => state.wishlists.wishes);
   const dispatch = useDispatch();
   const { wishes, isLoading, error } = useSelector((state) => state.wishlists);
-  // const [wishes, setWishes] = useState([]);
-
-  // const fetchTodos = async () => {
-  //   const { data } = await axios.get("http://localhost:4000/wishes");
-  //   setWishes(data);
-  // // };
-
-  //   const dispatch = useDispatch();
-  // const todo = useSelector((state) => state.todos.todo);
-  // const { id } = useParams;
-
-  // useEffect(() => {
-  //   dispatch(getTodoByID(id));
-  // }, [dispatch, id]);
 
   useEffect(() => {
     dispatch(__getWishes());

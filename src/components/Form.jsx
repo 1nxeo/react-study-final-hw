@@ -1,25 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Button from "./Button";
-// import useInput from "../hooks/useInput";
-// import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-// import { v4 as uuidv4 } from "uuid";
-// import { addWish } from "../redux/modules/wishlists";
 
 function Form() {
-  //   const [url, onChangeUrlHander] = useInput();
-  //   const [contents, onChangeContentsHandler] = useInput();
   const [wish, setWish] = useState({
     url: "",
     contents: "",
     isDone: false,
   });
-
-  // const [url, setUrl] = useState("");
-  // const [contents, setContents] = useState("");
-  // const wishes = useSelector((state) => state.wishlists.wishes);
-  // const dispatch = useDispatch();
 
   const [wishes, setWishes] = useState([]);
   const fetchTodos = async () => {
@@ -29,13 +18,12 @@ function Form() {
   useEffect(() => {
     fetchTodos();
   }, []);
-  console.log(wishes);
+  console.log(wish);
 
   const onSubmitHandler = async (wish) => {
     //1.  이때 todos는 [{투두하나}]임
     await axios.post("http://localhost:4000/wishes", wish); // 이때 서버에 있는 todos도 [{투두하나}]임
-    // 근데 여기서 서버 요청이 끝나고 서버는 [{투두가},{두개임}]
-    setWishes([...wishes, wish]);
+    fetchTodos();
   };
 
   // useEffect(() => {
@@ -53,6 +41,7 @@ function Form() {
           contents: "",
           isDone: false,
         });
+        setWishes([...wishes, wish]);
       }}
     >
       <StInput

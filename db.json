@@ -11,17 +11,23 @@
       "url": "https://www.goldii.com/product/content.asp?guid=26195289",
       "contents": "나도 이게 구매 완료였음 좋겠다..",
       "isDone": true
+    },
+    {
+      "url": "bb",
+      "contents": "bb",
+      "isDone": false,
+      "id": 3
     }
   ],
   "comments": [
     {
       "id": 1,
-      "body": "some comment",
+      "body": "와 사고싶다 ㅋㅋ",
       "postId": 1
     },
     {
-      "id": 1,
-      "body": "some comment",
+      "id": 2,
+      "body": "넘비쌈 ㅎ 패딩하나에 340",
       "postId": 2
     }
   ],
