@@ -11,6 +11,18 @@ const initialState = {
 };
 
 
+
+// export const __getComments = createAsyncThunk(
+//   "comments/getComments",
+//   async (payload, thunkAPI) => {
+//     try{
+//       const data = await axios.get(`${process.env.REACT_APP_SERVER_URL}/wishes`);
+//       return thunkAPI.fulfillWithValue(data.data.comments)
+//     }catch(err){
+//       return thunkAPI.rejectWithValue(err)
+//     }
+//   }
+// )
 export const __getWishes = createAsyncThunk(
     "wishes/getWishes",
     async (payload, thunkAPI) => {
@@ -44,12 +56,6 @@ const wishSlice =createSlice({
           const editList = [...state.wishes]
           editList.splice(editTargetIndex,1, action.payload)
           return {...state, wishes:editList}
-          // const editItemId = action.payload.id;
-          // const editItemIndex = state.findIndex((item)=> item.id === editItemId)
-          // const editedList = [...state]
-          // editedList.splice(editItemIndex, 1, {id:editItemId, title:action.editTitle, body:action.editBody, isDone:action.payload.isDone})
-          // alert("수정 완료!")
-          // return editedList
         }
     },
     extraReducers:{

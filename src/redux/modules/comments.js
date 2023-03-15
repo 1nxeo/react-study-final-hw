@@ -30,7 +30,7 @@ const commentSlice = createSlice({
     reducers:{
         addComment : (state, action) => {return {...state, wishes:[...state.wishes, action.payload]}},
         deleteComment : (state, action) => {
-          const newList = state.comments.filter((item)=>item.postId !== action.payload)
+          const newList = state.comments.filter((item)=>item.postId === action.payload)
           return {...state, wishes:newList}
         },
     },
