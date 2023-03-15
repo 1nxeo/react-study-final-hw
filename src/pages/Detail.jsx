@@ -20,7 +20,6 @@ function Detail() {
   useEffect(() => {
     fetchTodos();
   }, []);
-  console.log(wishes);
 
   return (
     <Wrapper>

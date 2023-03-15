@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import Button from "./Button";
 import styled from "styled-components";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateWish } from "../redux/modules/wishlists";
 
 const Modal = ({ wish, buttonName, bc, fontColor, buttonSize, margin }) => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [editWish, setEditWish] = useState({
     id: wish.id,
@@ -19,8 +22,8 @@ const Modal = ({ wish, buttonName, bc, fontColor, buttonSize, margin }) => {
   };
 
   const onSubmitHandler = async (editWish) => {
+    dispatch(updateWish(editWish));
     await axios.patch(`http://localhost:4000/wishes/${editWish.id}`, editWish);
-    window.location.reload();
   };
 
   return (

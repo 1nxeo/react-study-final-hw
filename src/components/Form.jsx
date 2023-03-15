@@ -21,18 +21,12 @@ function Form() {
   useEffect(() => {
     fetchTodos();
   }, []);
-  console.log(wish);
 
   const onSubmitHandler = async (wish) => {
-    //1.  이때 todos는 [{투두하나}]임
     dispatch(addWish(wish));
-    await axios.post("http://localhost:4000/wishes", wish); // 이때 서버에 있는 todos도 [{투두하나}]임
+    await axios.post("http://localhost:4000/wishes", wish);
     fetchTodos();
   };
-
-  // useEffect(() => {
-  //   fetchTodos();
-  // }, []);
 
   return (
     <FormWrapper

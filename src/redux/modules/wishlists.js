@@ -37,6 +37,19 @@ const wishSlice =createSlice({
         deleteWish : (state, action) => {
           const newList = state.wishes.filter((item)=>item.id !== action.payload)
           return {...state, wishes:newList}
+        },
+        updateWish : (state, action) => {
+          const editId = action.payload.id;
+          const editTargetIndex = state.wishes.findIndex((item)=>item.id === editId)
+          const editList = [...state.wishes]
+          editList.splice(editTargetIndex,1, action.payload)
+          return {...state, wishes:editList}
+          // const editItemId = action.payload.id;
+          // const editItemIndex = state.findIndex((item)=> item.id === editItemId)
+          // const editedList = [...state]
+          // editedList.splice(editItemIndex, 1, {id:editItemId, title:action.editTitle, body:action.editBody, isDone:action.payload.isDone})
+          // alert("수정 완료!")
+          // return editedList
         }
     },
     extraReducers:{
@@ -55,5 +68,5 @@ const wishSlice =createSlice({
 
 })
 
-export const { addWish ,switchWish, deleteWish} = wishSlice.actions;
+export const { addWish ,switchWish, deleteWish, updateWish} = wishSlice.actions;
 export default wishSlice.reducer;

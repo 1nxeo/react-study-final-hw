@@ -8,14 +8,11 @@ function Comments({ wish }) {
   const dispatch = useDispatch();
   const [viewComments, setComments] = useState();
   const { comments, isLoading, error } = useSelector((state) => state.comments);
-  console.log(comments);
 
   const commentList = comments.filter((item) => item.postId === wish.id);
   console.log(commentList);
   const fetchComments = async () => {
     const { data } = await axios.get("http://localhost:4000/comments");
-    // const targetComments = data.filter((item) => item.postId === wish.id);
-    // setComments(targetComments);
     console.log(data);
   };
 

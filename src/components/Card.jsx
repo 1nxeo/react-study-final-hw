@@ -24,11 +24,6 @@ function Card({ wish }) {
     });
   };
 
-  // useEffect(() => {
-  //   dispatch(__getWishes());
-  // }, [dispatch]);
-
-  console.log(wish);
   return (
     <CardWrapper key={wish.id}>
       <CardImage onClick={(e) => navigate(`/detail/${wish.id}`)}></CardImage>

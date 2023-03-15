@@ -18,20 +18,7 @@ function DetailBox() {
     return String(item.id) === String(id);
   });
 
-  console.log(wish);
-
   const [newComments, setNewComments] = useState({});
-
-  // const fetchTodos = async () => {
-  //   const { data } = await axios.get("http://localhost:4000/wishes");
-  //   setWishes(data);
-  // };
-  // const todo = useSelector((state) => state.todos.todo);
-  // const { id } = useParams;
-
-  // useEffect(() => {
-  //   dispatch(getTodoByID(id));
-  // }, [dispatch, id]);
 
   useEffect(() => {
     dispatch(__getWishes());
@@ -40,7 +27,6 @@ function DetailBox() {
   const commentSaveHandler = async (item) => {
     await axios.post("http://localhost:4000/comments", item);
     alert("댓글 등록 완료!");
-    window.location.reload();
   };
 
   if (isLoading) {
